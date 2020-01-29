@@ -1,0 +1,3 @@
+enum Schedule{
+    MORNING, LATE
+}

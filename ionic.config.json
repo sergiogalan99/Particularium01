@@ -1,0 +1,7 @@
+{
+  "name": "Particularium",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

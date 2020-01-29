@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar class="encabezado">
+    <ion-grid>
+      <ion-row>
+        <ion-button class="iconoAtras" routerLink='/sign-up'>
+          <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
+        </ion-button>
+        <ion-title class="encabezado"> ¿Qué tipo de usuario eres? </ion-title>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <ion-button color="#fff47e" class="buttonTeacher" (click)="addTeacher()">Teacher <img class="imagenTipoUser" src="assets/imgs/teacher.png">
+  </ion-button>
+  <ion-button color="#fff47e" class="buttonStudent" (click)="addStudent()">Student <img class="imagenTipoUser" src="assets/imgs/student.png">
+
+  </ion-button>
+</ion-content>

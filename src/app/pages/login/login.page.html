@@ -1,0 +1,39 @@
+
+<ion-header>
+ 
+  <ion-toolbar class="encabezado"> 
+    <ion-grid>
+     
+      <ion-row>
+        <ion-button class="iconoAtras" routerLink='/home'>  <ion-icon  ios="ios-arrow-back" md="md-arrow-back"></ion-icon></ion-button> 
+        <ion-col size="10">
+         
+          <img class="imagenLogin"  src="assets/imgs/iniciarSesion.png" > 
+          <ion-title class="encabezado">   LOGIN </ion-title>
+        </ion-col>
+       
+      </ion-row>
+      
+    </ion-grid>
+    
+   
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="home">
+<ion-list class="lista">
+  <ion-item class="camposFormulario">
+    <ion-label position="floting">Username: </ion-label>
+    <ion-input type="text" [(ngModel)]="userReg.email"> </ion-input>
+  </ion-item>
+  <ion-item class="camposFormulario">
+    <ion-label position="floting">Password: </ion-label>
+    <ion-input type="password" [(ngModel)]="userReg.password"></ion-input>
+  </ion-item>
+  
+  </ion-list>
+  <ion-footer class="footer">¿Has olvidado la contraseña?</ion-footer>
+  <ion-button color="#3b5999" class="buttonLogin" (click)="login()">Login</ion-button>
+</ion-content>
+
+
