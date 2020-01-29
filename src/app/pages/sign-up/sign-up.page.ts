@@ -21,7 +21,7 @@ export class SignUpPage implements OnInit {
 
   registrar(){
     
-    this.servSingUp.register()
+    this.servSingUp.register();
   }
 
 }

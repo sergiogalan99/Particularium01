@@ -21,7 +21,7 @@ export class ProfileStudentPage implements OnInit {
     iconAnchor: [26, 52], // point of the icon which will correspond to marker's location
     popupAnchor: [-3, -76]
   });
-  map: Map ;
+  geomap: Map ;
   marker: any;
   latLong = [];
   basura = [];
@@ -41,39 +41,39 @@ export class ProfileStudentPage implements OnInit {
   //Mapa
 
   ionViewDidEnter() {
-    this.map = new Map("myMapStudent");
-    let searchControl = geosearch().addTo(this.map);
+    this.geomap = new Map("myMapStudent");
+    let searchControl = geosearch().addTo(this.geomap);
     this.showMap();
   }
   showMap() {
 
-    this.basura.push(this.map);
-    this.map.setView([38.6760376, -6.4183859], 15);
+    this.basura.push(this.geomap);
+    this.geomap.setView([38.6760376, -6.4183859], 15);
     tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(this.map);
+    }).addTo(this.geomap);
     this.pintarIcono()
   }
 
   pintarIcono() {
-    this.map.on('click', function (e) {
+    this.geomap.on('click', function (e) {
       console.log(this.student.location);
       if (this.student.location != undefined) {
-        this.map.remove();
-        this.map = new Map("myMap");
+        this.geomap.remove();
+        this.geomap = new Map("myMap");
         this.showMap();
       }
       this.student.location = new firebase.firestore.GeoPoint(e.latlng.lat, e.latlng.lng);
       alert(e.latlng);
-      marker(e.latlng, { icon: this.profesorIcon }, 15).addTo(this.map)
+      marker(e.latlng, { icon: this.profesorIcon }, 15).addTo(this.geomap)
         .bindPopup('Hey, I\'m Here');
     }, this);
   }
 
   showMarker(latLong) {
     console.log(marker([0, 0]).getIcon());
-    marker(latLong, { icon: this.userIcon }, 15).addTo(this.map);
-    this.map.setView(latLong);
+    marker(latLong, { icon: this.userIcon }, 15).addTo(this.geomap);
+    this.geomap.setView(latLong);
   }
   getMarker(e) {
     console.log(e.latLng);

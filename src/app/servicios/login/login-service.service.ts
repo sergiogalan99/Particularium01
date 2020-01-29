@@ -23,19 +23,21 @@ export class LoginServiceService {
 
   async login() {
     this.afAuth.setUser(this.userReg);
-    return await this.afAuth.login().then(() => {
-      console.log("Profesor: "+this.afStore.isTeacher(this.afAuth.getCurrentUserUid()))
-      console.log("Alumno: "+this.afStore.isStudent(this.afAuth.getCurrentUserUid()))
-      if(!this.afStore.isTeacher(this.afAuth.getCurrentUserUid()) && !this.afStore.isStudent(this.afAuth.getCurrentUserUid())){
-        return this.routesv.navigateByUrl('/tipo-usuario');
-      }
-      else{
-        return this.routesv.navigateByUrl('/logged-in');
-      }
-      
-    }).catch((err) => {
-      console.log(err);//Alerta
-    });
+    return await this.afAuth.login().
+      then(() => {
+        console.log("Profesor: " + this.afStore.isTeacher(this.afAuth.getCurrentUserUid()))
+        console.log("Alumno: " + this.afStore.isStudent(this.afAuth.getCurrentUserUid()))
+        if (!this.afStore.isTeacher(this.afAuth.getCurrentUserUid()) && !this.afStore.isStudent(this.afAuth.getCurrentUserUid())) {
+          return this.routesv.navigateByUrl('/tipo-usuario');
+        }
+        else {
+          return this.routesv.navigateByUrl('/logged-in');
+        }
+
+      }).
+      catch((err) => {
+        console.log(err);//Alerta
+      });
   }
 
   /**
