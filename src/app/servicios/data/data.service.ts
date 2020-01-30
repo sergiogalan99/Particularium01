@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { Student } from './../../core/model/student';
 import { Teacher } from './../../core/model/teacher';
-import { User } from './../../interfaces/User';
+import { User } from './../../interfaces/UserInt';
 import { Subscription } from 'rxjs';
 
 @Injectable({

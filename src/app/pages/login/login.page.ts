@@ -16,11 +16,8 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
   login() {
-    if(this.userReg.cpassword==this.userReg.password){
       this.logServ.login()
-    }else{
-      alert("La contraseña no coincide")
-    }
+   
     
   }
 }

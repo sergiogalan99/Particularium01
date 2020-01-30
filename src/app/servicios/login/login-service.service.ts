@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { DataService } from '../data/data.service';
 import { Router } from '@angular/router';
-import { User } from 'src/app/interfaces/User';
+import { User } from 'src/app/interfaces/UserInt';
 import { Subscription } from 'rxjs';
 import { isNullOrUndefined } from 'util';
 
