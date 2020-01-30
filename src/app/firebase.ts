@@ -1,5 +1,5 @@
 const firebaseConfig = {
-	apiKey: 'AIzaSyDJAVJ4NsTVG6i9hKowGnNOmljP8KcFwxk',
+	apiKey: 'AIzaSyCmJ2_rixFaZ7sCV5B5CQqE5AgAb038Ug8',
 	authDomain: 'test-b68c5.firebaseapp.com',
 	databaseURL: 'https://test-b68c5.firebaseio.com',
 	projectId: 'test-b68c5',
