@@ -1,88 +1,124 @@
-import { Teacher } from '../../core/model/teacher';
-
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { isNullOrUndefined } from 'util';
 import { Injectable } from '@angular/core';
-import { Student } from '../../core/model/student';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { Student } from './../../core/model/student';
+import { Teacher } from './../../core/model/teacher';
+import { User } from './../../interfaces/User';
+import { Subscription } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class DataService {
-	constructor(private afStoreSv: AngularFirestore) { 
+	private students: AngularFirestoreCollection<User>;
+	private teachers: AngularFirestoreCollection<User>;
+	private users: AngularFirestoreCollection<unknown>;
+	private resultTeacher: boolean = false;
+	private resultStudent : boolean = false;
+	private _isMemberSubscription: Subscription;
 
+	constructor(private afStoreSv: AngularFirestore) {
+		this.students = this.afStoreSv.collection<User>('students');
+		this.teachers = this.afStoreSv.collection<User>('teachers');
+		this.users = this.afStoreSv.collection<unknown>('user');
+	}
+	 async isMember(idUser: string) {
+		 this.resultTeacher = false;
+		 await this.getTeacher(idUser).then((data)=>{
+			 console.log(data);
+			this.resultTeacher = data;
+		});
+		 await this.getStudent(idUser).then((data)=>{
+			console.log(data);
+			this.resultStudent = data;
+		});
+		
+		console.log("isTeacher",this.resultTeacher , "isStudent", this.resultStudent);
+		 if (this.resultTeacher || this.resultStudent) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	async getTeacher(idUser: string):Promise<boolean> {
+		return await new Promise((resolve, reject) => {
+			this.teachers.doc<User>(idUser).valueChanges().subscribe((data) => {
+				if (!isNullOrUndefined(data)) {
+					console.log('data student', data.email);
+					resolve(true);
+				}else{
+					resolve(false);
+				}
+			}, reject);
+		});
+	}
+
+	async getStudent(idUser: string):Promise<boolean> {
+		return await new Promise((resolve, reject) => {
+			this.students.doc<User>(idUser).valueChanges().subscribe((data) => {
+				if (!isNullOrUndefined(data)) {
+					console.log('data student', data.email);
+					resolve(true);
+				}else{
+					resolve(false);
+				}
+			}, reject);
+		});
 	}
 
 	addUserProfile(idUser: string, user: Teacher | Student) {
 		return this.afStoreSv.collection('user').doc(idUser).set(Object.assign({}, user));
 	}
 
-	updateTeacherProfile(idUser: string, teacher: Teacher) {
+	async updateTeacherProfile(idUser: string, teacher: Teacher) {
 		return this.afStoreSv
 			.collection('user')
 			.doc(idUser)
-			.update({
-				email: teacher.email
-			})
-			.then(function () {
+			.update(
+				{
+				name: teacher.name,
+				lastName : teacher.lastname,
+				phone : teacher.$phone,
+				email : teacher.email,
+				password: teacher.password,
+				location : teacher.location
+				}
+			)
+			.then(function() {
 				console.log('Document successfully updated!');
 			});
 	}
 
-	updateStudentProfile(idUser: string, student: Student) {
+	async updateStudentProfile(idUser: string, student: Student) {
 		return this.afStoreSv
 			.collection('user')
 			.doc(idUser)
 			.update({
-				email: student.email
+				name: student.name,
+				lastName : student.lastname,
+				email : student.email,
+				password: student.password,
+				location : student.location
 			})
-			.then(function () {
+			.then(function() {
 				console.log('Document successfully updated!');
 			});
 	}
 
 	addTeacherId(idUser: string) {
-		console.log(idUser);
-		return this.afStoreSv.collection('teachers').doc(idUser).set({idUser: idUser});
+		let user: User = {};
+		user.email = idUser;
+		return this.afStoreSv.collection('teachers').doc(idUser).set(user);
 	}
 
 	addStudentId(idUser: string) {
-		console.log(idUser);
-		return this.afStoreSv.collection('students').doc(idUser).set({idUser: idUser});
+		let user: User = {};
+		user.email = idUser;
+		return this.afStoreSv.collection('students').doc(idUser).set(user);
 	}
 
-	isTeacher(idUser: string) {
-		return this.afStoreSv
-			.collection('teachers', (ref) => ref.where('idUser', '==', idUser))
-			.get()
-			.toPromise()
-			.then(function (querySnapshot) {
-				querySnapshot.forEach(function (doc) {
-					console.log("hola");
-					return true;
-				});
-			})
-			.catch(function (error) {
-				console.log("hola");
-				return false;
-			});
-			
-	}
-	isStudent(idUser: string) {
-		return this.afStoreSv
-			.collection('students', (ref) => ref.where('idUser', '==', idUser))
-			.get()
-			.toPromise()
-			.then(function (querySnapshot) {
-				querySnapshot.forEach(function (doc) {
-					// doc.data() is never undefined for query doc snapshots
-					return true;
-				});
-			})
-			.catch(function (error) {
-				return false;
-			});
-			
-	}
+	
 
 	getProfile(idUser: string) {
 		let user = this.afStoreSv.collection('user').doc(idUser).get();
@@ -97,12 +133,13 @@ export class DataService {
 					console.log('No such document!');
 				}
 			})
-			.catch(function (error) {
+			.catch(function(error) {
 				console.log('Error getting document:', error);
 			});
 	}
-	addDemand() {
-		//to do
+	
+	addDemand(idUser:string) {
+		
 	}
 	getDemand() {
 		//to do
