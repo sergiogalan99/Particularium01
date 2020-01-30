@@ -10,12 +10,14 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import firebaseConfig from './firebase';
 import { AngularFireModule } from '@angular/fire';
-import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireAuthModule, AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AuthService } from './servicios/auth/auth.service';
+import { AuthServiceMock } from './servicios/auth/auth.service-mock';
 
 @NgModule({
-	declarations: [ AppComponent ],
-	entryComponents: [	],
+	declarations: [AppComponent],
+	entryComponents: [],
 	imports: [
 		BrowserModule,
 		IonicModule.forRoot(),
@@ -24,7 +26,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 		AngularFireAuthModule,
 		AngularFirestoreModule,
 	],
-	providers: [ StatusBar, SplashScreen, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy } ],
-	bootstrap: [ AppComponent ]
+	providers: [StatusBar, SplashScreen, { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },AuthService,
+		 AngularFireAuth],
+	bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }
