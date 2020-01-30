@@ -21,19 +21,38 @@
 </ion-header>
 
 <ion-content class="home">
-<ion-list class="lista">
-  <ion-item class="camposFormulario">
-    <ion-label position="floting">Username: </ion-label>
-    <ion-input type="text" [(ngModel)]="userReg.email"> </ion-input>
-  </ion-item>
-  <ion-item class="camposFormulario">
-    <ion-label position="floting">Password: </ion-label>
-    <ion-input type="password" [(ngModel)]="userReg.password"></ion-input>
-  </ion-item>
-  
-  </ion-list>
-  <ion-footer class="footer">¿Has olvidado la contraseña?</ion-footer>
-  <ion-button color="#3b5999" class="buttonLogin" (click)="login()">Login</ion-button>
+  <ion-grid>
+
+    <ion-row size="6">
+      <ion-col>
+        <ion-item class="camposFormulario">
+          <ion-label position="floting">Username: </ion-label>
+          <ion-input type="text" [(ngModel)]="userReg.email"> </ion-input>
+        </ion-item>
+      </ion-col>
+
+
+    </ion-row>
+    <ion-row size="6">
+
+      <ion-col>
+        <ion-item class="camposFormulario">
+          <ion-label position="floting">Password: </ion-label>
+          <ion-input type="password" [(ngModel)]="userReg.password"></ion-input>
+        </ion-item>
+</ion-col>       
+</ion-row>
+
+<ion-row size="6">
+
+  <ion-col>
+    <ion-footer class="footer">¿Has olvidado la contraseña?</ion-footer>
+    <ion-button color="#3b5999" class="buttonLogin" (click)="login()">Login</ion-button>
+</ion-col>       
+</ion-row>
+</ion-grid>
+
+
 </ion-content>
 
 
