@@ -6,7 +6,9 @@
      
       <ion-row>
         <ion-button class="iconoAtras" routerLink='/home'>  <ion-icon  ios="ios-arrow-back" md="md-arrow-back"></ion-icon></ion-button> 
-        <ion-col size="10">
+       
+       
+        <ion-col>
          
           <img class="imagenSignUp"  src="assets/imgs/registro.png" > 
           <ion-title class="encabezado">   SIGNUP </ion-title>
@@ -19,23 +21,46 @@
    
   </ion-toolbar>
 </ion-header>
-<ion-content padding >
-  <ion-list >
-    <ion-item class="camposFormulario">
-      <ion-label  position="floting">Email: </ion-label>
-      <ion-input type="text" [(ngModel)]="userReg.email"></ion-input>
-    </ion-item>
-   
-    <ion-item class="camposFormulario">
-      <ion-label position="floting">Password: </ion-label>
-      <ion-input type="password" [(ngModel)]="userReg.password"></ion-input>
-    </ion-item>
+<ion-content class="home">
 
-    <ion-item class="camposFormulario">
-      <ion-label position="floting">Confirm password : </ion-label>
-      <ion-input type="password" [(ngModel)]="userReg.cpassword"></ion-input>
-    </ion-item>
-    </ion-list>
+
+  <ion-row size="6">
+    <ion-col>
+      <ion-item class="camposFormulario">
+        <ion-label  position="floting">Email: </ion-label>
+        <ion-input type="text" [(ngModel)]="userReg.email"></ion-input>
+      </ion-item>
+    </ion-col>
+
+
+  </ion-row>
+  <ion-row size="6">
+
+    <ion-col>
+      <ion-item class="camposFormulario">
+        <ion-label position="floting">Password: </ion-label>
+        <ion-input type="password" [(ngModel)]="userReg.password"></ion-input>
+      </ion-item>
+</ion-col>       
+</ion-row>
+
+<ion-row size="6">
+
+<ion-col>
+  <ion-item class="camposFormulario">
+    <ion-label position="floting">Confirm password : </ion-label>
+    <ion-input type="password" [(ngModel)]="userReg.cpassword"></ion-input>
+  </ion-item>
+</ion-col>       
+</ion-row>
+
+<ion-row size="6">
+
+  <ion-col>
     <ion-button color="#fff47e" class="buttonSignUp" (click)="registrar()" >SignUp</ion-button>
+  </ion-col>       
+  </ion-row>
+  
+  
   </ion-content>
   
