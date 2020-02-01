@@ -1,4 +1,8 @@
-class Demand {
+import { Comunity } from './comunity';
+import { Mobility } from './mobility';
+import { Schedule } from './schedule';
+
+export class Demand {
     private id: number;
     private subject: string;
     private schedule: Schedule;
