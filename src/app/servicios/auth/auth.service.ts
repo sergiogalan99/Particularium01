@@ -1,4 +1,4 @@
-import { User } from '../../interfaces/UserInt';
+import { UserInt } from './../../interfaces/UserInt';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Injectable } from '@angular/core';
 @Injectable({
@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class AuthService {
 	
-	private user: User = {};
+	private user: UserInt = {};
 
 	constructor(private afAuth: AngularFireAuth) {}
 
