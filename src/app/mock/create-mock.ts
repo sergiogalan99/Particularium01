@@ -6,8 +6,8 @@ import { Demand } from './../core/model/demand';
 import { Createable } from './../interfaces/createable';
 export class CreateMock implements Createable{
 
-    private demands: Demand[];
-    private offers: Offer[];
+    private demands: Demand[]=new Array();
+    private offers: Offer[]=new Array();
     private myDemand: Demand;
     private myOffer: Offer;
 
