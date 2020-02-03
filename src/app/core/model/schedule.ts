@@ -1,3 +1,3 @@
-enum Schedule{
+export enum Schedule{
     MORNING, LATE
 }

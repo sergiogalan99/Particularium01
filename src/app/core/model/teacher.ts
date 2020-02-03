@@ -1,4 +1,5 @@
 import { User } from './user';
+import { Offer } from './offer';
 
 export class Teacher extends User {
     private phone: string;

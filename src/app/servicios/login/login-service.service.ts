@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
 import { DataService } from '../data/data.service';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
 
 @Injectable({
 	providedIn: 'root'
@@ -12,7 +11,6 @@ import { Subscription } from 'rxjs';
 export class LoginServiceService {
 	private userReg: UserInt = {};
 	private result: boolean = false;
-	private uIdSubscription: Subscription;
 	constructor(private afAuth: AuthService, private afStore: DataService, private routesv: Router) {}
 
 	async logout() {

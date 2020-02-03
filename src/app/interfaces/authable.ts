@@ -1,11 +1,11 @@
 
-export interface Authable{
-   
-    signUp(email : string, password : string , cpassword: string) : boolean ;
+export interface Authable {
 
-    login(email : string, password : string) : boolean;
+    regis(email: string, password: string, cpassword: string);
 
-    logout();
+    log(email: string, password: string);
 
-    
+    logOut();
+
+
 }

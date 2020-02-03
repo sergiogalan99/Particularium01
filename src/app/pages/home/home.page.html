@@ -1,31 +1,104 @@
 <ion-header>
   <ion-toolbar class="encabezado">
-    <img class="imagenParticularium"  src="assets/imgs/particularium.png">
-    <ion-title class="slogan">La educación es un proceso </ion-title>
-    <ion-title class="slogan"> que no termina nunca</ion-title>
-  
+    <img class="imagenParticularium" src="assets/imgs/particularium.png">
+
+
+
+    <!-- <img src='{{../../../../../assets/imgs/matematicas.png'> -->
+
   </ion-toolbar>
- 
+
 </ion-header>
 
-<ion-content class="home" >
+<ion-content class="home">
+
 
   <ion-grid>
     <ion-row>
       <ion-col size="12" class="contenedorBotones">
         <ion-button color="#003d99" class="buttonInicioLogin" routerLink='/login'>Login</ion-button>
       </ion-col>
-     
-     
+
+
     </ion-row>
     <ion-row>
       <!-- si excedes las doce columnas -->
       <ion-col size="12" class="contenedorBotones">
-        <ion-button  color="#3b5999" class="buttonInicioSignUp" routerLink='/sign-up'>Sign Up</ion-button>
-      </ion-col>       
+        <ion-button color="#3b5999" class="buttonInicioSignUp" routerLink='/sign-up'>Sign Up</ion-button>
+      </ion-col>
     </ion-row>
   </ion-grid>
- 
+
+  <br>
+  <ion-slides>
+    <ion-slide>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <h1>Establece tus propias condiciones</h1>
+          </ion-col>
+
+
+        </ion-row>
+        <ion-row>
+
+          <ion-col>
+            <img class="imagenSlide" src='{{../../../../../assets/imgs/condicciones.png'>
+    </ion-col>       
+  </ion-row>
+</ion-grid> 
+    </ion-slide>
+
+    
+    <ion-slide>
+
+
+
+         
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <h1>Crea tu anuncio gratis</h1>
+    </ion-col>
+   
+   
+  </ion-row>
+  <ion-row>
+    
+     <ion-col>
+       <img class="imagenSlide"src='{{../../../../../assets/imgs/moneyFree.png'>
+    </ion-col>       
+  </ion-row>
+</ion-grid> 
+
+</ion-slide>
+
+
+<ion-slide>
+
+
+
+         
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <h1>¡Comparte tu pasion!</h1>
+      </ion-col>
+     
+     
+    </ion-row>
+    <ion-row>
+      
+       <ion-col>
+         <img class="imagenSlide"src='{{../../../../../assets/imgs/profesor.png'>
+      </ion-col>       
+    </ion-row>
+  </ion-grid> 
+  
+  </ion-slide>
+  
+  </ion-slides>
   
 </ion-content>
 <ion-footer>
@@ -33,8 +106,3 @@
     <ion-title class="footer">Copyright Oficial 2020 ©</ion-title>
   </ion-toolbar>
 </ion-footer>
-
-
-
-
-

@@ -6,6 +6,9 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { Student } from './../../core/model/student';
 import { Teacher } from './../../core/model/teacher';
 import { map } from 'rxjs/operators';
+import { Demand } from 'src/app/core/model/demand';
+import { Offer } from 'src/app/core/model/offer';
+
 
 @Injectable({
 	providedIn: 'root'
