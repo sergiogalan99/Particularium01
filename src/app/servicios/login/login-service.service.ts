@@ -1,3 +1,4 @@
+import { SingUpServiceService } from 'src/app/servicios/singUp/sing-up-service.service';
 import { UserInt } from './../../interfaces/UserInt';
 import { Injectable } from '@angular/core';
 import { AuthService } from '../auth/auth.service';
@@ -11,7 +12,8 @@ import { Router } from '@angular/router';
 export class LoginServiceService {
 	private userReg: UserInt = {};
 	private result: boolean = false;
-	constructor(private afAuth: AuthService, private afStore: DataService, private routesv: Router) { }
+	constructor(private afAuth: AuthService, private afStore: DataService,
+		private routesv: Router, private servSingUp: SingUpServiceService) { }
 
 	async logout() {
 		this.afAuth.setUser(this.userReg);
@@ -34,22 +36,42 @@ export class LoginServiceService {
 	}
 
 	isMember() {
+
+		this.$userReg.idUser = this.afAuth.getCurrentUserUid();
+		console.log(this.$userReg);
+		this.afAuth.setUser(this.$userReg);
 		this.afStore.isMember(this.afAuth.getCurrentUserUid()).then((data) => {
 			if (data) {
+				this.servSingUp.$userReg = this.$userReg;
+				console.log('isMember');
 				this.afStore.isUser(this.afAuth.getCurrentUserUid()).then((data) => {
 					if (data) {
-						this.routesv.navigateByUrl('/menu');
-					} else {
-						this.afStore.isTeacher(this.afAuth.getCurrentUserUid()).then((data) => {
+						console.log('isUser');
+						this.afStore.isStudent(this.afAuth.getCurrentUserUid()).then((data) => {
 							if (data) {
+								console.log('isStudent');
+								this.routesv.navigateByUrl('/menu-demanda');
+							} else {
+								console.log('isTeacher');
+								this.routesv.navigateByUrl('/menu');
+							}
+						});
+					} else {
+						console.log('Not isUser');
+
+						this.afStore.isStudent(this.afAuth.getCurrentUserUid()).then((data) => {
+							if (data) {
+								console.log('isStudent');
 								this.routesv.navigateByUrl('/profileStudent');
 							} else {
+								console.log('isTeacher');
 								this.routesv.navigateByUrl('/profileTeacher');
 							}
 						});
 					}
 				});
 			} else {
+				console.log('Not isMenber');
 				this.routesv.navigateByUrl('/tipo-usuario');
 			}
 

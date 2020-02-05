@@ -1,7 +1,6 @@
 import { DemandOfferService } from './../../servicios/demandOffer/demand-offer.service';
 import { Component, OnInit } from '@angular/core';
 import { Offer } from 'src/app/core/model/offer';
-import { LoadingController } from '@ionic/angular';
 
 
 @Component({
@@ -13,7 +12,7 @@ export class MenuPage implements OnInit {
 
   private ofertas: Offer[] = [];
 
-  constructor(private ofertaServ: DemandOfferService, public loadingController: LoadingController) {
+  constructor(private ofertaServ: DemandOfferService) {
     
   }
 
@@ -28,7 +27,7 @@ export class MenuPage implements OnInit {
 
   async ObtenerOfertas() {
     await this.ofertaServ.ObtenerOfertasProfesor();
-    this.ofertas=this.ofertaServ.$ofertasPropias;
+    this.ofertas=this.ofertaServ.ofertasPropias;
     console.log(this.ofertas)
   }
 

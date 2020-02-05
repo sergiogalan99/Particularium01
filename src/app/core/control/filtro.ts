@@ -24,33 +24,33 @@ export class Filtro implements Filtrable {
     private comprobarMateria() {
         this.todasOfertas.forEach(element => {
             this.ofertasEncontradas = [];
-            if (this.demanda.$subject === undefined) {
+            if (this.demanda.subject === undefined) {
                 this.comprobarNivel(element);
-            } else if (this.demanda.$subject === element.subject) {
+            } else if (this.demanda.subject === element.subject) {
                 this.comprobarNivel(element);
             }
 
         });
     }
     private comprobarNivel(demanda) {
-        if (this.demanda.$level === undefined) {
+        if (this.demanda.level === undefined) {
             this.comprobarModelo(demanda);
-        } else if (this.demanda.$level === demanda.level) {
+        } else if (this.demanda.level === demanda.level) {
             this.comprobarModelo(demanda);
         }
     }
     private comprobarModelo(demanda) {
-        if (this.demanda.$community === undefined) {
+        if (this.demanda.community === undefined) {
             this.comprobarModalidad(demanda);
-        } else if (this.demanda.$community === demanda.community) {
+        } else if (this.demanda.community === demanda.community) {
             this.comprobarModalidad(demanda);
         }
     }
     private comprobarModalidad(demanda) {
 
-        if (this.demanda.$mobility === undefined) {
+        if (this.demanda.mobility === undefined) {
             this.ofertasEncontradas.push(demanda);
-        } else if (this.demanda.$mobility === demanda.mobility) {
+        } else if (this.demanda.mobility === demanda.mobility) {
             this.ofertasEncontradas.push(demanda);
         }
     }
