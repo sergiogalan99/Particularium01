@@ -41,6 +41,11 @@ const routes: Routes = [
     path: 'create-demanda',
     loadChildren: () => import('./pages/create-demanda/create-demanda.module').then( m => m.CreateDemandaPageModule)
   },
+  {
+    path: 'menu-demanda',
+    loadChildren: () => import('./pages/menu-demanda/menu-demanda.module').then( m => m.MenuDemandaPageModule)
+  },
+
 
 
 
@@ -51,7 +56,7 @@ const routes: Routes = [
 
   @NgModule({
 	imports: [
-	  RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
 	],
 	exports: [RouterModule]
   })
