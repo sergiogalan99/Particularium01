@@ -12,7 +12,7 @@
         </ion-col>
         <ion-col size="4" class="columnaSize">
           <ion-text>
-            <h3>OFFER MENU</h3>
+            <h3>DEMAND MENU</h3>
           </ion-text>
         </ion-col>
         <ion-col size="4" class="columnaSize">
@@ -31,48 +31,50 @@
 
 <ion-content class="home">
  
-      <ion-card class="cardStyle" *ngFor="let oferta of ofertas">
+
+      <ion-card class="cardStyle" *ngFor="let demanda of demandas">
         <ion-item>
           <ion-icon name="browsers"></ion-icon>
-          <ion-label>{{oferta.subject}}</ion-label>
+          <ion-label>{{demanda.subject}}</ion-label>
           <ion-button ><ion-icon  name = "trash"></ion-icon></ion-button>
-          <ion-button routerLink='/create-oferta'><ion-icon  name = "create"> </ion-icon ></ion-button>
+          <ion-button routerLink='/create-demanda'><ion-icon  name = "create"> </ion-icon ></ion-button>
         </ion-item>
 
         <ion-card-content>
-         Nivel: {{oferta.level}}
+         Nivel: {{demanda.level}}
         </ion-card-content>
         <ion-card-content>
-          Comunity: {{oferta.$comunity}}
+          Comunity: {{demanda.$comunity}}
          </ion-card-content>
          <ion-card-content>
-          Mobility: {{oferta.mobility}}
+          Mobility: {{demanda.mobility}}
          </ion-card-content>
          <ion-card-content>
-          Schedule: {{oferta.schedule}}
+          Schedule: {{demanda.schedule}}
          </ion-card-content>
       </ion-card>
    
 
-  <ion-grid>
+      <ion-grid>
 
-    <ion-tabs>
-
-      <ion-tab-bar>
-        <ion-tab-button routerLink='/create-oferta' tab="create">
-          <ion-icon name="calendar"></ion-icon>
-          <ion-label>
-            Create</ion-label>
-        </ion-tab-button>
-
-        <ion-tab-button routerLink='/profileTeacher' tab="editprofile">
-          <ion-icon name="contacts"></ion-icon>
-          <ion-label>Edit profile</ion-label>
-        </ion-tab-button>
-
-
-      </ion-tab-bar>
-    </ion-tabs>
-
-  </ion-grid>
+        <ion-tabs>
+    
+          <ion-tab-bar>
+            <ion-tab-button routerLink='/create-demanda' tab="create">
+              <ion-icon name="calendar"></ion-icon>
+              <ion-label>
+                Create</ion-label>
+            </ion-tab-button>
+    
+            <ion-tab-button routerLink='/profileStudent' tab="editprofile">
+              <ion-icon name="contacts"></ion-icon>
+              <ion-label>Edit profile</ion-label>
+            </ion-tab-button>
+    
+    
+          </ion-tab-bar>
+        </ion-tabs>
+    
+      </ion-grid>
+ 
 </ion-content>
