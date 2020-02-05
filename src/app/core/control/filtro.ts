@@ -26,7 +26,7 @@ export class Filtro implements Filtrable {
             this.ofertasEncontradas = [];
             if (this.demanda.$subject === undefined) {
                 this.comprobarNivel(element);
-            } else if (this.demanda.$subject === element.$subject) {
+            } else if (this.demanda.$subject === element.subject) {
                 this.comprobarNivel(element);
             }
 
