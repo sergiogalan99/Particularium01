@@ -57,6 +57,16 @@ const routes: Routes = [
     path: 'buscador-oferta',
     loadChildren: () => import('./pages/buscador-oferta/buscador-oferta.module').then( m => m.BuscadorOfertaPageModule)
   },
+  {
+    path: 'edit-profile-teacher',
+    loadChildren: () => import('./pages/edit-profile-teacher/edit-profile-teacher.module').then( m => m.EditProfileTeacherPageModule)
+  },
+  {
+    path: 'edit-profile-student',
+    loadChildren: () => import('./pages/edit-profile-student/edit-profile-student.module').then( m => m.EditProfileStudentPageModule)
+  },
+
+  
 
 
 

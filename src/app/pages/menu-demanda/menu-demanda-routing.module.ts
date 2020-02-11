@@ -1,3 +1,4 @@
+
 import { MostrarDemandasPageModule } from './../mostrar-demandas/mostrar-demandas.module';
 import { CreateDemandaPageModule } from './../create-demanda/create-demanda.module';
 import { NgModule } from '@angular/core';
@@ -5,6 +6,9 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { MenuDemandaPage } from './menu-demanda.page';
 import { ProfileStudentPageModule } from '../profileStudent/profileStudent.module';
+import { EditProfileStudentPage } from '../edit-profile-student/edit-profile-student.page';
+import { EditProfileStudentPageRoutingModule } from '../edit-profile-student/edit-profile-student-routing.module';
+import { EditProfileStudentPageModule } from '../edit-profile-student/edit-profile-student.module';
 
 const routes: Routes = [
   {
@@ -17,7 +21,7 @@ const routes: Routes = [
       },
       {
         path: 'editprofile',
-        loadChildren: () => ProfileStudentPageModule
+        loadChildren: () => EditProfileStudentPageModule
       },
       {
         path: 'mostrar-demandas',
