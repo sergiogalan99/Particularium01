@@ -53,6 +53,11 @@ const routes: Routes = [
     path: 'mostrar-ofertas',
     loadChildren: () => import('./pages/mostrar-ofertas/mostrar-ofertas.module').then( m => m.MostrarOfertasPageModule)
   },
+  {
+    path: 'buscador-oferta',
+    loadChildren: () => import('./pages/buscador-oferta/buscador-oferta.module').then( m => m.BuscadorOfertaPageModule)
+  },
+
 
 
 
