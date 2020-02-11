@@ -40,9 +40,9 @@ export class Filtro implements Filtrable {
         }
     }
     private comprobarModelo(demanda) {
-        if (this.demanda.community === undefined) {
+        if (this.demanda.comunity === undefined) {
             this.comprobarModalidad(demanda);
-        } else if (this.demanda.community === demanda.community) {
+        } else if (this.demanda.comunity === demanda.community) {
             this.comprobarModalidad(demanda);
         }
     }

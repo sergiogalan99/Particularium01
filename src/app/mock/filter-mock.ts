@@ -18,7 +18,7 @@ export class FilterMock implements Filtrable {
             if (oferta.subject === demandaBuscada.subject ||
                 oferta.level === demandaBuscada.level ||
                 oferta.schedule === demandaBuscada.schedule ||
-                oferta.community === demandaBuscada.community
+                oferta.comunity === demandaBuscada.comunity
                 || oferta.mobility === demandaBuscada.mobility) {
                 ofertasFiltradas.push(oferta);
             }

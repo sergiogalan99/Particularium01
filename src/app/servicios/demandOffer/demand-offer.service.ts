@@ -16,14 +16,20 @@ export class DemandOfferService implements Createable {
 
   private _demandasPropias: Demand[];
   private _ofertasPropias: Offer[];
-  private _todasOfertas: Offer[];
-  private _todasDemanda: Demand[];
+  private _todasOfertas: Offer[] = [];
+  private _todasDemanda: Demand[] = [];
 
   constructor(private afStore: DataService, private routesv: Router, private afAuth: AuthService, ) {
   }
 
   crearOferta(oferta: import("../../core/model/offer").Offer): boolean {
-    oferta.id = (this.todasOfertas.length + 1).toString();
+
+    if (this.todasOfertas.length === null) {
+      oferta.id = '1';
+    } else {
+      oferta.id = (this.todasOfertas.length + 1).toString();
+    }
+
     oferta.idUser = this.afAuth.getCurrentUserUid();
     console.log(oferta);
 
@@ -35,9 +41,14 @@ export class DemandOfferService implements Createable {
 
     throw new Error("Method not implemented.");
   }
-  crearDemanda(demanda: import("../../core/model/demand").Demand): boolean {
 
-    demanda.id = (this.todasDemanda.length + 1).toString();
+  crearDemanda(demanda: import("../../core/model/demand").Demand): boolean {
+    if (this.todasDemanda.length === null) {
+      demanda.id = '1';
+    } else {
+      demanda.id = (this.todasDemanda.length + 1).toString();
+    }
+
     demanda.idUser = this.afAuth.getCurrentUserUid();
     console.log(demanda);
 
@@ -71,10 +82,13 @@ export class DemandOfferService implements Createable {
     await this.getTodasDemanda().then((data: Offer[]) => {
       for (let index = 0; index < data.length; index++) {
         console.log('idUser:', this.afAuth.getCurrentUserUid());
-        console.log('idUserDemanda:', data[index]._idUser);
-        demandasPropias.push(data[index]);
-        if (data[index]._idUser === this.afAuth.getCurrentUserUid()) {
-          demandas.push(data[index]);
+        var demanda = data[index];
+        console.log('Demanda:');
+        console.log(demanda);
+        console.log('idUserDemanda:', demanda.idUser);
+        demandasPropias.push(demanda);
+        if (demanda.idUser === this.afAuth.getCurrentUserUid()) {
+          demandas.push(demanda);
         }
 
       }
