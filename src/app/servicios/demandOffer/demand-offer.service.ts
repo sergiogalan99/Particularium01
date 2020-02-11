@@ -16,6 +16,7 @@ export class DemandOfferService implements Createable {
 
   private _demandasPropias: Demand[];
   private _ofertasPropias: Offer[];
+  private _ofertasEncontradas: Offer[];
   private _todasOfertas: Offer[] = [];
   private _todasDemanda: Demand[] = [];
 
@@ -70,10 +71,9 @@ export class DemandOfferService implements Createable {
 
   }
 
-  getOfertasEncontradas(demanda): Offer[] {
-
-    return new Filtro().filtrar(this.todasOfertas, demanda);
-
+  getOfertasEncontradas(demanda) {
+    this.ofertasEncontradas = new Filtro().filtrar(this.todasOfertas, demanda);
+    this.routesv.navigateByUrl('/filtro');
   }
 
   async ObtenerDemandasPropias() {
@@ -82,13 +82,11 @@ export class DemandOfferService implements Createable {
     await this.getTodasDemanda().then((data: Offer[]) => {
       for (let index = 0; index < data.length; index++) {
         console.log('idUser:', this.afAuth.getCurrentUserUid());
-        var demanda = data[index];
-        console.log('Demanda:');
-        console.log(demanda);
-        console.log('idUserDemanda:', demanda.idUser);
-        demandasPropias.push(demanda);
-        if (demanda.idUser === this.afAuth.getCurrentUserUid()) {
-          demandas.push(demanda);
+        console.log(data[index]);
+        console.log('idUserDemanda:', data[index]._idUser);
+        demandasPropias.push(data[index]);
+        if (data[index]._idUser === this.afAuth.getCurrentUserUid()) {
+          demandas.push(data[index]);
         }
 
       }
@@ -183,5 +181,21 @@ export class DemandOfferService implements Createable {
     this._todasDemanda = value;
   }
 
+
+  /**
+   * Getter ofertasEncontradas
+   * @return {Offer[]}
+   */
+  public get ofertasEncontradas(): Offer[] {
+    return this._ofertasEncontradas;
+  }
+
+  /**
+   * Setter ofertasEncontradas
+   * @param {Offer[]} value
+   */
+  public set ofertasEncontradas(value: Offer[]) {
+    this._ofertasEncontradas = value;
+  }
 
 }

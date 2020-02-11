@@ -1,14 +1,13 @@
-import {  RouterLink } from '@angular/router';
-import { DemandOfferService } from './../../servicios/demandOffer/demand-offer.service';
-import { Demand } from 'src/app/core/model/demand';
 import { Component, OnInit } from '@angular/core';
+import { Demand } from 'src/app/core/model/demand';
+import { DemandOfferService } from 'src/app/servicios/demandOffer/demand-offer.service';
 
 @Component({
-  selector: 'app-menu-demanda',
-  templateUrl: './menu-demanda.page.html',
-  styleUrls: ['./menu-demanda.page.scss'],
+  selector: 'app-mostrar-demandas',
+  templateUrl: './mostrar-demandas.page.html',
+  styleUrls: ['./mostrar-demandas.page.scss'],
 })
-export class MenuDemandaPage implements OnInit {
+export class MostrarDemandasPage implements OnInit {
 
   private demandas: Demand[] = [];
 
@@ -20,7 +19,6 @@ export class MenuDemandaPage implements OnInit {
 
   ionViewWillEnter() {
     this.ObtenerDemandas();
-    this.mostrarDemandas()
   }
 
   async ObtenerDemandas() {

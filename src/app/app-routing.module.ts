@@ -45,6 +45,15 @@ const routes: Routes = [
     path: 'menu-demanda',
     loadChildren: () => import('./pages/menu-demanda/menu-demanda.module').then( m => m.MenuDemandaPageModule)
   },
+  {
+    path: 'mostrar-demandas',
+    loadChildren: () => import('./pages/mostrar-demandas/mostrar-demandas.module').then( m => m.MostrarDemandasPageModule)
+  },
+  {
+    path: 'mostrar-ofertas',
+    loadChildren: () => import('./pages/mostrar-ofertas/mostrar-ofertas.module').then( m => m.MostrarOfertasPageModule)
+  },
+
 
 
 
