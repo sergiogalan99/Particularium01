@@ -90,6 +90,13 @@ export class SingUpServiceService {
 			});
 	}
 
+	async updateStudent(student: Student) {
+		await this.afStore.updateStudentProfile(this.afAuth.getCurrentUserUid(), student);
+	}
+	async updateTeacher(teacher: Teacher) {
+		await this.afStore.updateTeacherProfile(this.afAuth.getCurrentUserUid(), teacher);
+	}
+
 	/**
      * Getter $userReg
      * @return {User }
@@ -113,4 +120,7 @@ export class SingUpServiceService {
 		});
 		await alert.present();
 	}
+
+
+
 }

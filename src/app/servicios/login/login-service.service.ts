@@ -1,3 +1,4 @@
+import { DemandOfferService } from 'src/app/servicios/demandOffer/demand-offer.service';
 import { SingUpServiceService } from 'src/app/servicios/singUp/sing-up-service.service';
 import { UserInt } from './../../interfaces/UserInt';
 import { Injectable } from '@angular/core';
@@ -13,15 +14,16 @@ export class LoginServiceService {
 	private userReg: UserInt = {};
 	private result: boolean = false;
 	constructor(private afAuth: AuthService, private afStore: DataService,
-		private routesv: Router, private servSingUp: SingUpServiceService) { }
+		private routesv: Router, private servSingUp: SingUpServiceService, private servDemandOffer: DemandOfferService) {
+	}
 
 	async logout() {
 		this.afAuth.setUser(this.userReg);
-		this.afAuth.logOut();
 		return await this.afAuth
 			.logOut()
 			.then(() => {
 				this.routesv.navigateByUrl('/home');
+				console.log('sesion cerrada')
 			})
 			.catch((err) => {
 				console.log(err); //Alerta
@@ -78,9 +80,28 @@ export class LoginServiceService {
 		});
 	}
 
-	async eliminarUsuario() {
+	async eliminarStudent() {
+		this.afStore.deleteStudent(this.afAuth.getCurrentUserUid());
+		await this.servDemandOffer.ObtenerDemandasPropias();
+		this.servDemandOffer.demandasPropias.forEach(element => {
+			this.afStore.deleteDemanda(element.id);
+		});
+		
+		this.afStore.deleteUser(this.afAuth.getCurrentUserUid());
 		this.afAuth.deleteUser();
+		this.routesv.navigateByUrl('/home');
 	}
+	async eliminarTeacher() {
+		this.afStore.deleteTeacher(this.afAuth.getCurrentUserUid());
+		await this.servDemandOffer.ObtenerOfertasProfesor();
+		this.servDemandOffer.ofertasPropias.forEach(element => {
+			this.afStore.deleteOferta(element.id);
+		});
+		this.afStore.deleteUser(this.afAuth.getCurrentUserUid());
+		this.afAuth.deleteUser();
+		this.routesv.navigateByUrl('/home');
+	}
+
 
 
 	/**

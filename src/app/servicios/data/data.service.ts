@@ -235,4 +235,20 @@ export class DataService {
 	updateDemand(demand: Demand) {
 		return this.demands.doc().update(demand);
 	}
+
+	deleteUser(idUser: string) {
+		this.afStoreSv.collection('user').doc(idUser).delete();
+	}
+	deleteOferta(id: string) {
+		this.afStoreSv.collection('offer').doc(id).delete();
+	}
+	deleteDemanda(id: string) {
+		this.afStoreSv.collection('demands').doc(id).delete();
+	}
+	deleteTeacher(id: string) {
+		this.afStoreSv.collection('teachers').doc(id).delete();
+	}
+	deleteStudent(id: string) {
+		this.afStoreSv.collection('students').doc(id).delete();
+	}
 }

@@ -71,9 +71,16 @@ export class DemandOfferService implements Createable {
 
   }
 
-  getOfertasEncontradas(demanda) {
+  async getOfertasEncontradas(demanda) {
+    this.todasOfertas = [];
+    console.log('dentro de servicio',demanda)
+    await this.getTodasOfertas().then((data: Offer[]) => {
+      for (let index = 0; index < data.length; index++) {
+        this.todasOfertas.push(data[index]);
+      }
+    });
     this.ofertasEncontradas = new Filtro().filtrar(this.todasOfertas, demanda);
-    this.routesv.navigateByUrl('/filtro');
+    this.routesv.navigateByUrl('/buscador-oferta');
   }
 
   async ObtenerDemandasPropias() {
@@ -116,6 +123,14 @@ export class DemandOfferService implements Createable {
     });
   }
 
+  DeleteOferta(id: string){
+    this.afStore.deleteOferta(id);
+    this.routesv.navigateByUrl('/menu-demanda');
+  }
+  DeleteDemanda(id: string){
+    this.afStore.deleteDemanda(id);
+    this.routesv.navigateByUrl('/menu');
+  }
 
   /**
    * Getter demandasPropias

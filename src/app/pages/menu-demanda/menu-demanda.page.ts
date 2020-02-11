@@ -1,6 +1,3 @@
-import {  RouterLink } from '@angular/router';
-import { DemandOfferService } from './../../servicios/demandOffer/demand-offer.service';
-import { Demand } from 'src/app/core/model/demand';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -10,28 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuDemandaPage implements OnInit {
 
-  private demandas: Demand[] = [];
 
-  constructor(private demandaServ: DemandOfferService) {
+  constructor() {
   }
 
   ngOnInit() {
   }
 
-  ionViewWillEnter() {
-    this.ObtenerDemandas();
-    this.mostrarDemandas()
-  }
 
-  async ObtenerDemandas() {
-    await this.demandaServ.ObtenerDemandasPropias();
-    this.demandas = this.demandaServ.demandasPropias;
-    console.log(this.demandas);
-  }
-
-  mostrarDemandas(){
-    console.log('Hola');
-    //this.demandaServ.getOfertasEncontradas(demanda);
-  }
 
 }

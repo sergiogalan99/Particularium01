@@ -1,9 +1,6 @@
 <ion-header>
-
   <ion-toolbar class="encabezado">
-
     <ion-grid>
-
       <ion-row size="12">
         <ion-col size="4" class="columnaSize">
           <ion-button routerLink='/menu-demanda'>
@@ -22,22 +19,16 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-
-
   </ion-toolbar>
 </ion-header>
-
-
 <ion-content class="home">
-
   <ion-grid>
-   
     <ion-row>
       <ion-col>
         <ion-item class="camposFormulario">
           <ion-label position="floting">Firstname: </ion-label>
-          <!-- <ion-input type="text" [(ngModel)]="student.name"> </ion-input> -->
-          <ion-input type="text"> </ion-input> 
+          <ion-input type="text" [(ngModel)]="student.name"> </ion-input>
+          <ion-input type="text"> </ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -45,7 +36,7 @@
       <ion-col>
         <ion-item class="camposFormulario">
           <ion-label position="floting">Lastname: </ion-label>
-          <!-- <ion-input type="text" [(ngModel)]="student.lastname"></ion-input> -->
+          <ion-input type="text" [(ngModel)]="student.lastname"></ion-input>
           <ion-input type="text"></ion-input>
         </ion-item>
       </ion-col>
@@ -53,19 +44,17 @@
     <ion-row>
       <ion-col>
         <ion-item>
-          <div id="myMapStudent" class="map" ></div>
+          <div id="myMapStudent" class="map"></div>
         </ion-item>
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col>
-        <ion-button color="#3b5999" class="buttonAceptar" (click)="save()">Save</ion-button>
+        <ion-button color="#3b5999" class="buttonAceptar" (click)="update()">Update</ion-button>
       </ion-col>
       <ion-col size="6">
-        <ion-button color="#3b5999" class="buttonCancel" (click)="Cancel()">Cancel</ion-button>
+        <ion-button color="#3b5999" class="buttonCancel" (click)="delete()">Delete</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
-
-
 </ion-content>
