@@ -12,10 +12,10 @@ export class CreateMock implements Createable {
     private myOffer: Offer;
 
     constructor() {
-        this.demands.push(new Demand("1", "Math", Schedule.LATE, Mobility.AT_HOME, Comunity.IGNORE, "Pipita´s Teach", "Third Grade"));
-        this.offers.push(new Offer("1", "Bio", Schedule.MORNING, Mobility.OWN_LOCAL, Comunity.GROUP, "visible", "second grade"));
-        this.myDemand = new Demand("3", "Spanish", Schedule.LATE, Mobility.OWN_LOCAL, Comunity.INDIVIDUAL, "Busco clase", "Third Grade");
-        this.myOffer = new Offer('4', "Lang", Schedule.LATE, Mobility.OWN_LOCAL, Comunity.INDIVIDUAL, "visible", "Second Grade");
+        this.demands.push(new Demand());
+        this.offers.push(new Offer());
+        this.myDemand = new Demand();
+        this.myOffer = new Offer();
     }
 
 

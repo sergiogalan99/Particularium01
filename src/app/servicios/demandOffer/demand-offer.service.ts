@@ -1,12 +1,10 @@
 import { Offer } from './../../core/model/offer';
 import { Filtro } from './../../core/control/filtro';
 import { Demand } from './../../core/model/demand';
-import { UserInt } from './../../interfaces/UserInt';
 import { Createable } from './../../interfaces/createable';
 import { Injectable } from '@angular/core';
 import { DataService } from '../data/data.service';
 import { Router } from '@angular/router';
-import { element } from 'protractor';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 
@@ -16,77 +14,203 @@ import { AuthService } from '../auth/auth.service';
 export class DemandOfferService implements Createable {
 
 
-  private subcribeteDemanda: Subscription;
-  private subcribeteOfertas: Subscription;
-  private demandasPropias: Demand[];
-  private ofertasPropias: Offer[];
-  private todasOfertas: Offer[];
+  private _demandasPropias: Demand[];
+  private _ofertasPropias: Offer[];
+  private _ofertasEncontradas: Offer[];
+  private _todasOfertas: Offer[] = [];
+  private _todasDemanda: Demand[] = [];
 
   constructor(private afStore: DataService, private routesv: Router, private afAuth: AuthService, ) {
-
   }
 
   crearOferta(oferta: import("../../core/model/offer").Offer): boolean {
-   
-    oferta.$id = this.afAuth.getCurrentUserUid();
+
+    if (this.todasOfertas.length === null) {
+      oferta.id = '1';
+    } else {
+      oferta.id = (this.todasOfertas.length + 1).toString();
+    }
+
+    oferta.idUser = this.afAuth.getCurrentUserUid();
     console.log(oferta);
 
     this.afStore.addOffer(this.afAuth.getCurrentUserUid(), oferta);
 
+    this.routesv.navigateByUrl('/menu');
+
     return true;
 
     throw new Error("Method not implemented.");
   }
+
   crearDemanda(demanda: import("../../core/model/demand").Demand): boolean {
+    if (this.todasDemanda.length === null) {
+      demanda.id = '1';
+    } else {
+      demanda.id = (this.todasDemanda.length + 1).toString();
+    }
+
+    demanda.idUser = this.afAuth.getCurrentUserUid();
+    console.log(demanda);
 
     this.afStore.addDemand(this.afAuth.getCurrentUserUid(), demanda);
-    
+
+    this.routesv.navigateByUrl('/menu-demanda');
+
     return true;
 
     throw new Error("Method not implemented.");
   }
 
-  getTodasDemanda() {
-    this.demandasPropias = [];
-    this.subcribeteDemanda = this.afStore.getAllDemands().subscribe((data: Demand[]) => {
-      console.log(data);
-      data.forEach(element => {
-        if (this.afAuth.getCurrentUserUid() === element.$id) {
-          this.demandasPropias.push(element);
+  async getTodasDemanda() {
+    return this.afStore.getAllDemandsDos();
+  }
+
+  async getTodasOfertas() {
+    return this.afStore.getAllOffersDos();
+
+  }
+
+  async getOfertasEncontradas(demanda) {
+    this.todasOfertas = [];
+    console.log('dentro de servicio',demanda)
+    await this.getTodasOfertas().then((data: Offer[]) => {
+      for (let index = 0; index < data.length; index++) {
+        this.todasOfertas.push(data[index]);
+      }
+    });
+    this.ofertasEncontradas = new Filtro().filtrar(this.todasOfertas, demanda);
+    this.routesv.navigateByUrl('/buscador-oferta');
+  }
+
+  async ObtenerDemandasPropias() {
+    var demandas = []
+    var demandasPropias = []
+    await this.getTodasDemanda().then((data: Offer[]) => {
+      for (let index = 0; index < data.length; index++) {
+        console.log('idUser:', this.afAuth.getCurrentUserUid());
+        console.log(data[index]);
+        console.log('idUserDemanda:', data[index]._idUser);
+        demandasPropias.push(data[index]);
+        if (data[index]._idUser === this.afAuth.getCurrentUserUid()) {
+          demandas.push(data[index]);
         }
-      });
+
+      }
+      this.todasDemanda = demandasPropias;
+      console.log(demandasPropias);
+      this.demandasPropias = demandas;
+      console.log(demandas);
     });
-
-    return this.demandasPropias;
-
   }
-
-  getTodasOfertas(): Offer[] {
-    this.subcribeteOfertas = this.afStore.getAllOffers().subscribe((data: Offer[]) => {
-      console.log("data")
-      console.log(data)
-      this.todasOfertas = data;
-    });
-    return this.todasOfertas;
-  }
-
-  getOfertasEncontradas(demanda): Offer[] {
-
-    return new Filtro().filtrar(this.getTodasOfertas(), demanda);
-
-  }
-
-  getOfertasProfesor() {
-    this.ofertasPropias = [];
-    this.subcribeteDemanda = this.afStore.getAllOffers().subscribe((data: Offer[]) => {
-      data.forEach(element => {
-        if (this.afAuth.getCurrentUserUid() === element.$id) {
-          this.ofertasPropias.push(element);
+  async ObtenerOfertasProfesor() {
+    var ofertas = []
+    var ofertasProfesor = []
+    await this.getTodasOfertas().then((data: Offer[]) => {
+      for (let index = 0; index < data.length; index++) {
+        console.log('idUser:', this.afAuth.getCurrentUserUid());
+        console.log('idUserOferta:', data[index]._idUser);
+        ofertasProfesor.push(data[index]);
+        if (data[index]._idUser === this.afAuth.getCurrentUserUid()) {
+          ofertas.push(data[index]);
         }
-      });
-    });
 
-    return this.ofertasPropias;
+      }
+      this.todasOfertas = ofertasProfesor;
+      console.log(ofertasProfesor)
+      this.ofertasPropias = ofertas;
+      console.log(ofertas);
+    });
+  }
+
+  DeleteOferta(id: string){
+    this.afStore.deleteOferta(id);
+    this.routesv.navigateByUrl('/menu-demanda');
+  }
+  DeleteDemanda(id: string){
+    this.afStore.deleteDemanda(id);
+    this.routesv.navigateByUrl('/menu');
+  }
+
+  /**
+   * Getter demandasPropias
+   * @return {Demand[]}
+   */
+  public get demandasPropias(): Demand[] {
+    return this._demandasPropias;
+  }
+
+  /**
+   * Setter demandasPropias
+   * @param {Demand[]} value
+   */
+  public set demandasPropias(value: Demand[]) {
+    this._demandasPropias = value;
+  }
+
+  /**
+   * Getter ofertasPropias
+   * @return {Offer[]}
+   */
+  public get ofertasPropias(): Offer[] {
+    return this._ofertasPropias;
+  }
+
+  /**
+   * Setter ofertasPropias
+   * @param {Offer[]} value
+   */
+  public set ofertasPropias(value: Offer[]) {
+    this._ofertasPropias = value;
+  }
+
+  /**
+   * Getter todasOfertas
+   * @return {Offer[]}
+   */
+  public get todasOfertas(): Offer[] {
+    return this._todasOfertas;
+  }
+
+  /**
+   * Setter todasOfertas
+   * @param {Offer[]} value
+   */
+  public set todasOfertas(value: Offer[]) {
+    this._todasOfertas = value;
+  }
+
+  /**
+   * Getter todasDemanda
+   * @return {Demand[]}
+   */
+  public get todasDemanda(): Demand[] {
+    return this._todasDemanda;
+  }
+
+  /**
+   * Setter todasDemanda
+   * @param {Demand[]} value
+   */
+  public set todasDemanda(value: Demand[]) {
+    this._todasDemanda = value;
+  }
+
+
+  /**
+   * Getter ofertasEncontradas
+   * @return {Offer[]}
+   */
+  public get ofertasEncontradas(): Offer[] {
+    return this._ofertasEncontradas;
+  }
+
+  /**
+   * Setter ofertasEncontradas
+   * @param {Offer[]} value
+   */
+  public set ofertasEncontradas(value: Offer[]) {
+    this._ofertasEncontradas = value;
   }
 
 }
