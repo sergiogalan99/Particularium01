@@ -8,6 +8,7 @@ import { Teacher } from './../../core/model/teacher';
 import { map } from 'rxjs/operators';
 import { Demand } from 'src/app/core/model/demand';
 import { Offer } from 'src/app/core/model/offer';
+import { IGlobalId } from 'src/app/interfaces/IGlobalId';
 
 @Injectable({
 	providedIn: 'root'
@@ -18,7 +19,7 @@ export class DataService {
 	private demands: AngularFirestoreCollection<Demand>;
 	private offers: AngularFirestoreCollection<Offer>;
 	private users: AngularFirestoreCollection<User>;
-	private globalId: AngularFirestoreCollection<UserInt>;
+	private globalId: AngularFirestoreCollection<IGlobalId>;
 	private userLogData: UserInt;
 	private resultTeacher: boolean = false;
 	private resultStudent: boolean = false;
@@ -30,23 +31,23 @@ export class DataService {
 		this.demands = this.afStoreSv.collection<Demand>('demands');
 		this.offers = this.afStoreSv.collection<Offer>('offer');
 		this.users = this.afStoreSv.collection<User>('user');
-		this.globalId = this.afStoreSv.collection<UserInt>('globalId');
+		this.globalId = this.afStoreSv.collection<IGlobalId>('globalId');
 		this.userLogData = {};
 	}
 	async updateIdGlobal() {
 		await this.getGlobalId().then((data: string) => {
-			let id: UserInt = {};
+			let globalId: IGlobalId = {};
 			let idPlus = parseInt(data) + 1;
-			id.idUser = idPlus.toString();
-			console.log(id.idUser);
-			this.afStoreSv.collection('globalId').doc<UserInt>('id').set(Object.assign({}, id));
+			globalId.id = idPlus.toString();
+			console.log(globalId.id);
+			this.afStoreSv.collection('globalId').doc<IGlobalId>('id').set(Object.assign({}, globalId));
 		});
 	}
 
 	async getGlobalId(): Promise<string> {
 		return await new Promise((resolve) => {
-			this.globalId.doc<UserInt>('id').valueChanges().subscribe((data) => {
-				let result = data.idUser;
+			this.globalId.doc<IGlobalId>('id').valueChanges().subscribe((data) => {
+				let result = data.id;
 				console.log(result);
 				resolve(result);
 			});
@@ -191,11 +192,35 @@ export class DataService {
 	}
 
 	addDemand(idUser: string, demand: Demand) {
-		return this.afStoreSv.collection('demands').doc(demand.id).set(Object.assign({}, demand));
+		return this.afStoreSv.collection('demands').doc(idUser).set(Object.assign({}, demand));
 	}
 
 	addOffer(idUser: string, offer: Offer) {
-		return this.afStoreSv.collection('offer').doc(offer.id).set(Object.assign({}, offer));
+		return this.afStoreSv.collection('offer').doc(idUser).set(Object.assign({}, offer));
+	}
+
+	getDemand(id: string) {
+		let result: Demand = new Demand();
+		this.getAllDemands().subscribe((data) => {
+			data.forEach((demand) => {
+				if (demand.id === id) {
+					result == demand;
+				}
+			});
+		});
+		return result;
+	}
+	
+	getOffer(id:string){
+		let result: Offer = new Offer();
+		this.getAllOffers().subscribe((data) => {
+			data.forEach((offer) => {
+				if (offer.id === id) {
+					result == offer;
+				}
+			});
+		});
+		return result;
 	}
 
 	getAllDemands() {
