@@ -49,7 +49,7 @@ export class DemandOfferService implements Createable {
     oferta.idUser = this.afAuth.getCurrentUserUid();
     console.log(oferta);
 
-    this.afStore.addOffer(this.afAuth.getCurrentUserUid(), oferta);
+    this.afStore.addOffer(globalId, oferta);
 
     this.routesv.navigateByUrl('/menu');
 
@@ -65,7 +65,7 @@ export class DemandOfferService implements Createable {
     demanda.idUser = this.afAuth.getCurrentUserUid();
     console.log(demanda);
 
-    this.afStore.addDemand(this.afAuth.getCurrentUserUid(), demanda);
+    this.afStore.addDemand(globalId, demanda);
 
     this.routesv.navigateByUrl('/menu-demanda');
     

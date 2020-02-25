@@ -191,12 +191,12 @@ export class DataService {
 		});
 	}
 
-	addDemand(idUser: string, demand: Demand) {
-		return this.afStoreSv.collection('demands').doc(idUser).set(Object.assign({}, demand));
+	addDemand(id: string, demand: Demand) {
+		return this.afStoreSv.collection('demands').doc(id).set(Object.assign({}, demand));
 	}
 
-	addOffer(idUser: string, offer: Offer) {
-		return this.afStoreSv.collection('offer').doc(idUser).set(Object.assign({}, offer));
+	addOffer(id: string, offer: Offer) {
+		return this.afStoreSv.collection('offer').doc(id).set(Object.assign({}, offer));
 	}
 
 	getDemand(id: string) {
