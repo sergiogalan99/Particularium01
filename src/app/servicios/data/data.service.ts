@@ -159,13 +159,13 @@ export class DataService {
 	}
 
 	async updateTeacherProfile(idUser: string, teacher: Teacher) {
-		return this.afStoreSv.collection('user').doc(idUser).update(teacher).then(function() {
+		return this.afStoreSv.collection('user').doc(idUser).update(teacher).then(function () {
 			console.log('Document successfully updated!');
 		});
 	}
 
 	async updateStudentProfile(idUser: string, student: Student) {
-		return this.afStoreSv.collection('user').doc(idUser).update(student).then(function() {
+		return this.afStoreSv.collection('user').doc(idUser).update(student).then(function () {
 			console.log('Document successfully updated!');
 		});
 	}
@@ -210,8 +210,8 @@ export class DataService {
 		});
 		return result;
 	}
-	
-	getOffer(id:string){
+
+	getOffer(id: string) {
 		let result: Offer = new Offer();
 		this.getAllOffers().subscribe((data) => {
 			data.forEach((offer) => {

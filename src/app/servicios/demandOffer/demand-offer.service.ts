@@ -5,7 +5,7 @@ import { Createable } from './../../interfaces/createable';
 import { Injectable } from '@angular/core';
 import { DataService } from '../data/data.service';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, of } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { UserInt } from 'src/app/interfaces/UserInt';
 
@@ -23,20 +23,20 @@ export class DemandOfferService implements Createable {
 
   constructor(private afStore: DataService, private routesv: Router, private afAuth: AuthService, ) {
   }
-  
-  async generateOfferWithId(oferta:Offer){
-    await this.afStore.getGlobalId().then((data)=>{
-      this.crearOferta(oferta,data);
+
+  async generateOfferWithId(oferta: Offer) {
+    await this.afStore.getGlobalId().then((data) => {
+      this.crearOferta(oferta, data);
       this.afStore.updateIdGlobal();
     })
   }
-  async generateDemandWithId(demand:Demand){
-    await this.afStore.getGlobalId().then((data)=>{
-      this.crearDemanda(demand,data);
+  async generateDemandWithId(demand: Demand) {
+    await this.afStore.getGlobalId().then((data) => {
+      this.crearDemanda(demand, data);
       this.afStore.updateIdGlobal();
     })
   }
-  crearOferta(oferta: import("../../core/model/offer").Offer,globalId:string): boolean {
+  crearOferta(oferta: import("../../core/model/offer").Offer, globalId: string): boolean {
 
     /*if (this.todasOfertas.length === null) {
       oferta.id = '1';
@@ -49,6 +49,8 @@ export class DemandOfferService implements Createable {
     oferta.idUser = this.afAuth.getCurrentUserUid();
     console.log(oferta);
 
+    console.log(oferta);
+
     this.afStore.addOffer(globalId, oferta);
 
     this.routesv.navigateByUrl('/menu');
@@ -58,7 +60,7 @@ export class DemandOfferService implements Createable {
     throw new Error("Method not implemented.");
   }
 
-  crearDemanda(demanda: import("../../core/model/demand").Demand,globalId:string): boolean {
+  crearDemanda(demanda: import("../../core/model/demand").Demand, globalId: string): boolean {
 
     demanda.id = globalId
 
@@ -68,7 +70,7 @@ export class DemandOfferService implements Createable {
     this.afStore.addDemand(globalId, demanda);
 
     this.routesv.navigateByUrl('/menu-demanda');
-    
+
     return true;
 
     throw new Error("Method not implemented.");
@@ -85,13 +87,14 @@ export class DemandOfferService implements Createable {
 
   async getOfertasEncontradas(demanda) {
     this.todasOfertas = [];
-    console.log('dentro de servicio',demanda)
+    console.log('dentro de servicio', demanda)
     await this.getTodasOfertas().then((data: Offer[]) => {
       for (let index = 0; index < data.length; index++) {
         this.todasOfertas.push(data[index]);
       }
     });
     this.ofertasEncontradas = new Filtro().filtrar(this.todasOfertas, demanda);
+    
     this.routesv.navigateByUrl('/buscador-oferta');
   }
 
@@ -135,11 +138,11 @@ export class DemandOfferService implements Createable {
     });
   }
 
-  DeleteOferta(id: string){
+  DeleteOferta(id: string) {
     this.afStore.deleteOferta(id);
     this.routesv.navigateByUrl('/menu-demanda');
   }
-  DeleteDemanda(id: string){
+  DeleteDemanda(id: string) {
     this.afStore.deleteDemanda(id);
     this.routesv.navigateByUrl('/menu');
   }
