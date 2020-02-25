@@ -7,6 +7,7 @@ import { DataService } from '../data/data.service';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
+import { UserInt } from 'src/app/interfaces/UserInt';
 
 @Injectable({
   providedIn: 'root'
@@ -22,14 +23,28 @@ export class DemandOfferService implements Createable {
 
   constructor(private afStore: DataService, private routesv: Router, private afAuth: AuthService, ) {
   }
+  
+  async generateOfferWithId(oferta:Offer){
+    await this.afStore.getGlobalId().then((data)=>{
+      this.crearOferta(oferta,data);
+      this.afStore.updateIdGlobal();
+    })
+  }
+  async generateDemandWithId(demand:Demand){
+    await this.afStore.getGlobalId().then((data)=>{
+      this.crearDemanda(demand,data);
+      this.afStore.updateIdGlobal();
+    })
+  }
+  crearOferta(oferta: import("../../core/model/offer").Offer,globalId:string): boolean {
 
-  crearOferta(oferta: import("../../core/model/offer").Offer): boolean {
-
-    if (this.todasOfertas.length === null) {
+    /*if (this.todasOfertas.length === null) {
       oferta.id = '1';
     } else {
       oferta.id = (this.todasOfertas.length + 1).toString();
-    }
+    }*/
+
+    oferta.id = globalId;
 
     oferta.idUser = this.afAuth.getCurrentUserUid();
     console.log(oferta);
@@ -43,12 +58,9 @@ export class DemandOfferService implements Createable {
     throw new Error("Method not implemented.");
   }
 
-  crearDemanda(demanda: import("../../core/model/demand").Demand): boolean {
-    if (this.todasDemanda.length === null) {
-      demanda.id = '1';
-    } else {
-      demanda.id = (this.todasDemanda.length + 1).toString();
-    }
+  crearDemanda(demanda: import("../../core/model/demand").Demand,globalId:string): boolean {
+
+    demanda.id = globalId
 
     demanda.idUser = this.afAuth.getCurrentUserUid();
     console.log(demanda);
@@ -56,7 +68,7 @@ export class DemandOfferService implements Createable {
     this.afStore.addDemand(this.afAuth.getCurrentUserUid(), demanda);
 
     this.routesv.navigateByUrl('/menu-demanda');
-
+    
     return true;
 
     throw new Error("Method not implemented.");
