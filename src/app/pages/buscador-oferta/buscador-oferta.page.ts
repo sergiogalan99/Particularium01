@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Offer } from 'src/app/core/model/offer';
+import { DemandOfferService } from 'src/app/servicios/demandOffer/demand-offer.service';
 
 @Component({
   selector: 'app-buscador-oferta',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BuscadorOfertaPage implements OnInit {
 
-  constructor() { }
+  private ofertas: Offer[] = [];
+
+  constructor(private ofertaServ: DemandOfferService) {
+    
+  }
 
   ngOnInit() {
+    
+  }
+
+  ionViewWillEnter(){
+    this.ObtenerOfertas();
+  }
+
+  ObtenerOfertas() {
+    this.ofertas=this.ofertaServ.ofertasEncontradas;
+    console.log(this.ofertas);
   }
 
 }

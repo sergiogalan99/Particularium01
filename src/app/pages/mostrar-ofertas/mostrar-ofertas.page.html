@@ -6,7 +6,7 @@
 
       <ion-row size="12">
         <ion-col size="4" class="columnaSize">
-          <ion-button routerLink='/home'>
+          <ion-button (click)="logout()">
             <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
           </ion-button>
         </ion-col>
@@ -30,34 +30,29 @@
 
 
 <ion-content class="home">
- 
-      <ion-card class="cardStyle" *ngFor="let oferta of ofertas">
-        <ion-item>
-          <ion-icon name="browsers"></ion-icon>
-          <ion-label>{{oferta._subject}}</ion-label>
-          <ion-button ><ion-icon  name = "trash"></ion-icon></ion-button>
-          <ion-button routerLink='/create-oferta'><ion-icon  name = "create"> </ion-icon ></ion-button>
-        </ion-item>
 
-        <ion-card-content>
-         Nivel: {{oferta._level}}
-        </ion-card-content>
-        <ion-card-content>
-          Comunity: {{oferta._comunity}}
-         </ion-card-content>
-         <ion-card-content>
-          Mobility: {{oferta._mobility}}
-         </ion-card-content>
-         <ion-card-content>
-          Schedule: {{oferta._schedule}}
-         </ion-card-content>
-      </ion-card>
-   
-
-  <ion-grid>
-
-    
-
-  </ion-grid>
-  
+  <ion-card class="cardStyle" *ngFor="let oferta of ofertas">
+    <ion-item>
+      <ion-icon name="browsers"></ion-icon>
+      <ion-label>{{oferta._subject}}</ion-label>
+      <ion-button (click)="delete(oferta.id)">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
+      <!--<ion-button routerLink='/create-oferta'>
+        <ion-icon name="create"> </ion-icon>
+      </ion-button>-->
+    </ion-item>
+    <ion-card-content>
+      Nivel: {{oferta._level}}
+    </ion-card-content>
+    <ion-card-content>
+      Comunity: {{oferta._comunity}}
+    </ion-card-content>
+    <ion-card-content>
+      Mobility: {{oferta._mobility}}
+    </ion-card-content>
+    <ion-card-content>
+      Schedule: {{oferta._schedule}}
+    </ion-card-content>
+  </ion-card>
 </ion-content>

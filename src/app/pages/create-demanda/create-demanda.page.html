@@ -34,15 +34,15 @@
   <ion-card>
     <ion-item >
       <ion-label position="floting">Asignature: </ion-label >
-      <ion-input class="size" type="text" [(ngModel)]="demanda.subject"> </ion-input>
+      <ion-input class="size" type="text" [(ngModel)]="demanda.subject" aria-placeholder=""> </ion-input>
       </ion-item>
     <ion-item>
       <ion-label position="floting">Nevel: </ion-label>
-      <ion-input class="size" type="text" [(ngModel)]="demanda.level"> </ion-input>
+      <ion-input class="size" type="text" [(ngModel)]="demanda.level" aria-placeholder=""> </ion-input>
     </ion-item>
     <ion-item>
       <ion-label position="floting">Title: </ion-label>
-      <ion-input class="size" type="text" [(ngModel)]="demanda.title"> </ion-input>
+      <ion-input class="size" type="text" [(ngModel)]="demanda.title" aria-placeholder=""> </ion-input>
     </ion-item>
   </ion-card>
 
@@ -52,7 +52,7 @@
     
   
       <ion-label position="floting">Comunity: </ion-label>
-      <select class="size" name="comunity" [(ngModel)]="demanda.community">
+      <select class="size" name="comunity" [(ngModel)]="demanda.comunity">
               <option *ngFor="let comunity of arrayCom"> {{comunity}}
         </option>
       </select>

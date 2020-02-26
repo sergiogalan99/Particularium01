@@ -1,12 +1,9 @@
 <ion-header>
-
   <ion-toolbar class="encabezado">
-
     <ion-grid>
-
       <ion-row size="12">
         <ion-col size="4" class="columnaSize">
-          <ion-button routerLink='/home'>
+          <ion-button (click)="logout()">
             <ion-icon ios="ios-arrow-back" md="md-arrow-back"></ion-icon>
           </ion-button>
         </ion-col>
@@ -27,31 +24,32 @@
 
 
 <ion-content class="home">
-
-  <ion-card class="cardStyle" *ngFor="let demanda of demandas" (click)="mostrarDemandas()">
-    <ion-item>
-      <ion-icon name="browsers"></ion-icon>
-      <ion-label>{{demanda._title}}</ion-label>
-      <ion-button>
-        <ion-icon name="trash"></ion-icon>
-      </ion-button>
-      <ion-button routerLink='/create-demanda'>
-        <ion-icon name="create"> </ion-icon>
-      </ion-button>
-    </ion-item>
-
-    <ion-card-content>
-      Nivel: {{demanda._level}}
-    </ion-card-content>
-    <ion-card-content>
-      Comunity: {{demanda._comunity}}
-    </ion-card-content>
-    <ion-card-content>
-      Mobility: {{demanda._mobility}}
-    </ion-card-content>
-    <ion-card-content>
-      Schedule: {{demanda._schedule}}
-    </ion-card-content>
-
-  </ion-card>
+  <div *ngFor="let demanda of demandas">
+    <ion-card class="cardStyle">
+      <ion-item>
+        <ion-icon name="browsers"></ion-icon>
+        <ion-label>{{demanda._title}}</ion-label>
+        <ion-button (click)="delete(demanda.id)">
+          <ion-icon name="trash"></ion-icon>
+        </ion-button>
+        <!--<ion-button routerLink='/create-demanda'>
+          <ion-icon name="create"> </ion-icon>
+        </ion-button>-->
+      </ion-item>
+      <div (click)="mostrarDemandas(demanda)">
+        <ion-card-content>
+          Nivel: {{demanda._level}}
+        </ion-card-content>
+        <ion-card-content>
+          Comunity: {{demanda._comunity}}
+        </ion-card-content>
+        <ion-card-content>
+          Mobility: {{demanda._mobility}}
+        </ion-card-content>
+        <ion-card-content>
+          Schedule: {{demanda._schedule}}
+        </ion-card-content>
+      </div>
+    </ion-card>
+  </div>
 </ion-content>

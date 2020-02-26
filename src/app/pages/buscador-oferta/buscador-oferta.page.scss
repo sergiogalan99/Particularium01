@@ -1,11 +1,7 @@
 .imagen{
-    width:50%; 
+    width: 40%; 
    
      
-}
-.iconCard{
-    width:15%;
-  
 }
 .encabezado{
     font-size: 25px;
@@ -14,7 +10,10 @@
    
     
 }
-
+.camposFormulario{
+    font-size: 15px;
+    border: 1px double black;
+}
 .iconoAtras{
     margin-top: 15px;
     font-size: 15px;
@@ -22,12 +21,21 @@
     
 }
 
-.size{
-    text-align: center;
-    width: 60%;
+.buttonLogin{
+    width: 100%;
+    background: #003d99;
+    border: 2px double white;
 }
-
-
+.footer{
+    font-size: 12.5px;
+    text-align: center;
+     color: rgb(0, 0, 0);
+     margin-top: 5px;
+     margin-bottom: 25px;
+}
+.lista{
+    background-color: transparent;
+}
 
 .columnaSize{
     text-align: center;
@@ -37,16 +45,13 @@
    
 }
 
+.olvidarContraseña{
+    text-align: center;
+   
+}
 .tabsMenu{
     height: 80%;
 }
-.buttonAceptar{
-    width: 100%;
-    background: #003d99;
-    border: 2px double white;
-}
-.buttonCancel{
-    width: 100%;
-    background: #991200;
-    border: 2px double white;
+.cardStyle{
+    background-color: lightgrey;
 }
